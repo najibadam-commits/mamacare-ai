@@ -13,7 +13,7 @@ Only the current `main` branch is supported. Fixes are made on `main`; there are
 
 Please report privately **before** opening any public issue or pull request.
 
-- Email **najibadam911@gmail.com** with the subject line `MamaCare AI security`.
+- Email **najibadam@gmail.com** with the subject line `MamaCare AI security`.
 - Include what you found, steps to reproduce, affected files or versions, and the impact you expect. Do not include real patient or user data.
 - Please give us reasonable time to fix the problem before public disclosure. We will credit reporters who want credit.
 
