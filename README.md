@@ -1,8 +1,23 @@
 # MamaCare AI
 
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
+[![DPG Standard: self-assessed](https://img.shields.io/badge/DPG_Standard-self--assessed-orange.svg)](DPG_CHECKLIST.md)
+[![SDG 3: Good Health](https://img.shields.io/badge/SDG_3-Good_Health-4C9F38.svg)](DPG_CHECKLIST.md)
+[![SDG 5: Gender Equality](https://img.shields.io/badge/SDG_5-Gender_Equality-FF3A21.svg)](DPG_CHECKLIST.md)
+
 A mobile-first maternal health platform for Nigeria. MamaCare AI gives expectant and new mothers trusted health guides, appointment tracking, an AI assistant, and a directory of nearby healthcare facilities, in **English, Hausa and Nigerian Pidgin**.
 
 > Status: **pilot candidate (Sprint 8)** - offline-first PWA, multilingual UI, guides, appointments with private reminders, deterministic triage, facility directory, RAG assistant, NDPA privacy controls, DHIS2 connector, Docker deployment and end-to-end tests. Clinical content and translations are **unreviewed prototypes**: see [docs/PILOT.md](docs/PILOT.md) before any real-world use. DPG self-assessment: [DPG_CHECKLIST.md](DPG_CHECKLIST.md).
+
+## Executive summary
+
+MamaCare AI is open-source, offline-first maternal health support for pregnant and postnatal women and the frontline health workers who help them in low-connectivity settings. Emergency detection is deterministic and runs on the device; the optional assistant answers only from a curated corpus. See [SAFETY.md](SAFETY.md) for the clinical safety protocol and [DPG_CHECKLIST.md](DPG_CHECKLIST.md) for the (self-assessed) Digital Public Goods mapping.
+
+**Request flow:** `Deterministic emergency rule engine (on device)` -> `RAG engine: input guard -> retrieval over the clinical corpus -> extractive (or optional LLM) answer -> output guard` -> `offline FAQ fallback if the backend is unreachable`.
+
+**Not built (do not assume):** quantized on-device language models, ONNX runtime inference, SQLite storage, or an automated PII-stripping pipeline. The RAG engine stores no user data; the web app keeps data in IndexedDB.
+
+**Data extraction (DPG indicator 6):** users can export their own data as JSON (Settings), and `packages/dhis2-connector` produces zero-PII aggregate DHIS2 `DataValueSet` payloads. There is no CSV export CLI.
 
 ## Features (current shell)
 
