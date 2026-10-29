@@ -13,6 +13,8 @@ A mobile-first maternal health platform for Nigeria. MamaCare AI gives expectant
 
 MamaCare AI is open-source, offline-first maternal health support for pregnant and postnatal women and the frontline health workers who help them in low-connectivity settings. Emergency detection is deterministic and runs on the device; the optional assistant answers only from a curated corpus. See [SAFETY.md](SAFETY.md) for the clinical safety protocol and [DPG_CHECKLIST.md](DPG_CHECKLIST.md) for the (self-assessed) Digital Public Goods mapping.
 
+**Roadmap:** the 12-month plan is in [ROADMAP.md](ROADMAP.md).
+
 **Request flow:** `Deterministic emergency rule engine (on device)` -> `RAG engine: input guard -> retrieval over the clinical corpus -> extractive (or optional LLM) answer -> output guard` -> `offline FAQ fallback if the backend is unreachable`.
 
 **Not built (do not assume):** quantized on-device language models, ONNX runtime inference, SQLite storage, or an automated PII-stripping pipeline. The RAG engine stores no user data; the web app keeps data in IndexedDB.
