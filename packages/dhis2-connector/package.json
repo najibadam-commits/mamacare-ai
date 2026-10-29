@@ -1,0 +1,26 @@
+{
+  "name": "@mamacare/dhis2-connector",
+  "version": "0.1.0",
+  "description": "Privacy-preserving aggregate reporting from MamaCare AI to DHIS2 (POST /api/dataValueSets).",
+  "license": "Apache-2.0",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": { ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" } },
+  "files": ["dist", "README.md"],
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "lint": "eslint .",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.17.0",
+    "eslint": "^9.17.0",
+    "globals": "^15.14.0",
+    "typescript": "~5.6.3",
+    "typescript-eslint": "^8.18.2",
+    "vitest": "^5.0.5"
+  }
+}

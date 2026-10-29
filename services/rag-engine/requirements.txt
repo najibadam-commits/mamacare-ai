@@ -1,0 +1,14 @@
+# MamaCare AI - RAG engine
+# Versions below are the lower bounds this service was developed and tested against.
+fastapi>=0.115
+uvicorn[standard]>=0.30
+pydantic>=2.8
+langchain>=0.3
+langchain-community>=0.3
+chromadb>=0.5
+httpx>=0.27
+pytest>=8.0
+
+# Optional: real semantic embeddings (downloads ~90 MB model, pulls in PyTorch).
+# Uncomment and set RAG_EMBEDDING_BACKEND=sentence-transformers to use them.
+# sentence-transformers>=3.0

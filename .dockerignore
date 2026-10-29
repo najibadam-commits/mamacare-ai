@@ -1,0 +1,12 @@
+**/node_modules
+**/dist
+**/.git
+**/*.log
+**/test-results
+**/playwright-report
+**/__pycache__
+**/.pytest_cache
+**/.venv
+services/rag-engine/data/chroma
+deploy/certs/*.pem
+.env
