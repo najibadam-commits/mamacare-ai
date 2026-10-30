@@ -1,3 +1,5 @@
+<p align="center"><img src="docs/assets/logo.png" alt="MamaCare AI - Bridging Maternal & Newborn Care" width="420"></p>
+
 # MamaCare AI
 
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)

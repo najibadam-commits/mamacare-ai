@@ -30,14 +30,19 @@ export default function Header({ onEmergency, onOpenSettings }: HeaderProps) {
 
   return (
     <header className="sticky top-0 z-20 bg-navy pt-[env(safe-area-inset-top)] text-white shadow-md">
-      <div className="mx-auto flex h-14 max-w-xl items-center justify-between gap-2 px-4">
-        <h1 className="text-lg font-bold tracking-tight">MamaCare AI</h1>
+      <div className="mx-auto flex h-14 max-w-xl items-center justify-between gap-2 px-3">
+        <h1 className="flex min-w-0 items-center gap-1.5 whitespace-nowrap text-[15px] max-[340px]:text-sm font-bold tracking-tight min-[400px]:text-base">
+          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white shadow-sm">
+            <img src="/logo-mark.png" alt="" width={28} height={29} className="h-6 w-auto" />
+          </span>
+          MamaCare AI
+        </h1>
 
-        <div className="flex items-center gap-2">
+        <div className="flex shrink-0 items-center gap-1.5">
           <button
             type="button"
             onClick={onEmergency}
-            className="flex items-center gap-1.5 rounded-full bg-red-600 px-3 py-1.5 text-xs font-bold uppercase tracking-wide text-white shadow ring-2 ring-red-300/40 transition hover:bg-red-700 active:scale-95"
+            className="flex items-center gap-1.5 rounded-full bg-red-600 px-2.5 py-1.5 text-xs font-bold uppercase tracking-wide text-white shadow ring-2 ring-red-300/40 transition hover:bg-red-700 active:scale-95"
             aria-label={t('header.sosLabel')}
           >
             <Siren className="h-4 w-4" aria-hidden />
@@ -51,11 +56,11 @@ export default function Header({ onEmergency, onOpenSettings }: HeaderProps) {
               aria-haspopup="listbox"
               aria-expanded={open}
               aria-label={`${t('header.languageLabel')}: ${current.label}`}
-              className="flex items-center gap-1 rounded-full bg-white/10 px-3 py-1.5 text-xs font-semibold transition hover:bg-white/20"
+              className="flex items-center gap-1 rounded-full bg-white/10 px-2.5 py-1.5 text-xs font-semibold transition hover:bg-white/20"
             >
-              <Globe className="h-4 w-4" aria-hidden />
+              <Globe className="h-4 w-4 max-[340px]:hidden" aria-hidden />
               {current.short}
-              <ChevronDown className="h-3.5 w-3.5" aria-hidden />
+              <ChevronDown className="hidden h-3.5 w-3.5 min-[400px]:block" aria-hidden />
             </button>
             {open && (
               <ul

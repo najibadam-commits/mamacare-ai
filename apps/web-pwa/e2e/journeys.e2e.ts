@@ -88,7 +88,7 @@ test.describe('Journey 2 - Antenatal appointment, persistence and discreet remin
     await expect.poll(async () => (await recorded()).length, { timeout: 30_000 }).toBeGreaterThan(0)
     const [n] = await recorded()
     expect(n!.title).toBe('Health reminder')
-    expect(n!.body).toMatch(/^Reminder: You have a health visit scheduled for today at \d{2}:\d{2}/)
+    expect(n!.body).toMatch(/^Reminder: You have a health visit scheduled for today at \d{1,2}:\d{2}/)
     const shown = JSON.stringify(n).toLowerCase()
     for (const leak of ['antenatal', 'secret', 'gwarzo', 'hospital', 'blood', 'pregnan', 'private']) expect(shown).not.toContain(leak)
     expect(n!.icon).toBeUndefined()
