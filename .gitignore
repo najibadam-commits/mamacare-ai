@@ -3,3 +3,12 @@ dist
 *.local
 .DS_Store
 *.tsbuildinfo
+
+# test and runtime artefacts
+test-results/
+playwright-report/
+.pytest_cache/
+__pycache__/
+.venv/
+.env
+services/rag-engine/data/chroma/

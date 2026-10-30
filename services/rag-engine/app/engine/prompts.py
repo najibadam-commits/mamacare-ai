@@ -83,7 +83,15 @@ def build_messages(question: str, context: str, language: str, stage: str | None
         stage=stage or "unknown",
     )
     role_map = {"system": "system", "human": "user", "ai": "assistant"}
-    return [{"role": role_map.get(m.type, "user"), "content": str(m.content)} for m in rendered]
+    out: list[dict[str, str]] = []
+    for m in rendered:
+        # Newer langchain-core releases may return plain dicts instead of message objects.
+        if isinstance(m, dict):
+            kind, content = str(m.get("role") or m.get("type") or "human"), m.get("content", "")
+        else:
+            kind, content = m.type, m.content
+        out.append({"role": role_map.get(kind, kind if kind in ("system", "user", "assistant") else "user"), "content": str(content)})
+    return out
 
 
 DISCLAIMERS = {
