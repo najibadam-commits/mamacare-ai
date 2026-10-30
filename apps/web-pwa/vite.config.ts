@@ -24,7 +24,11 @@ export default defineConfig(({ mode }) => {
   const ragTarget = env.VITE_RAG_API_URL || 'http://localhost:8000'
   const apiProxy = { '/api': { target: ragTarget, changeOrigin: true } }
 
+  // Sub-path hosting (e.g. GitHub Pages at /mamacare-ai/): build with VITE_BASE=/mamacare-ai/. Defaults to '/'.
+  const base = (process.env.VITE_BASE || '/').replace(/\/?$/, '/')
+
   return {
+  base,
   server: { proxy: apiProxy },
   preview: { proxy: apiProxy },
   plugins: [
@@ -38,8 +42,8 @@ export default defineConfig(({ mode }) => {
         short_name: 'MamaCare',
         description: 'Maternal health guides, appointments and care directory - works offline.',
         lang: 'en',
-        start_url: '/',
-        scope: '/',
+        start_url: base,
+        scope: base,
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#F8FAFC',

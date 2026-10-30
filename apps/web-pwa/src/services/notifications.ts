@@ -128,7 +128,7 @@ export function buildReminderPayload(
 
   const title = appt.title || t(`appt.defaultTitle.${appt.appointmentType}`)
   const body = appt.facilityName ? `${when} · ${appt.facilityName}` : when
-  return { title, body, tag, icon: '/pwa-192x192.png' }
+  return { title, body, tag, icon: `${import.meta.env.BASE_URL}pwa-192x192.png` }
 }
 
 // ---------------------------------------------------------------------------
@@ -159,7 +159,7 @@ export async function sendTestReminder(ctx: ReminderContext): Promise<boolean> {
       title: discreet ? ctx.t('notif.discreetTitle') : 'MamaCare AI',
       body: ctx.t('notif.testBody'),
       tag: 'reminder-test',
-      icon: discreet ? undefined : '/pwa-192x192.png',
+      icon: discreet ? undefined : `${import.meta.env.BASE_URL}pwa-192x192.png`,
     },
     ctx.language,
   )

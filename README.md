@@ -9,11 +9,13 @@
 
 A mobile-first maternal health platform for Nigeria. MamaCare AI gives expectant and new mothers trusted health guides, appointment tracking, an AI assistant, and a directory of nearby healthcare facilities, in **English, Hausa and Nigerian Pidgin**.
 
-> Status: **pilot candidate (Sprint 8)** - offline-first PWA, multilingual UI, guides, appointments with private reminders, deterministic triage, facility directory, RAG assistant, NDPA privacy controls, DHIS2 connector, Docker deployment and end-to-end tests. Clinical content and translations are **unreviewed prototypes**: see [docs/PILOT.md](docs/PILOT.md) before any real-world use. DPG self-assessment: [DPG_CHECKLIST.md](DPG_CHECKLIST.md).
+> Status: **pilot candidate (Sprint 8)** - offline-first PWA, multilingual UI, guides, appointments with private reminders, deterministic triage, facility directory, RAG assistant, NDPA privacy controls, DHIS2 connector, Docker deployment and end-to-end tests. Clinical content and translations are **unreviewed prototypes**: see [docs/PILOT.md](docs/PILOT.md) before any real-world use. DPG self-assessment: [DPG_CHECKLIST.md](DPG_CHECKLIST.md). Privacy and safeguarding drafts: [docs/DPIA.md](docs/DPIA.md), [docs/SAFEGUARDING.md](docs/SAFEGUARDING.md).
 
 ## Executive summary
 
 MamaCare AI is open-source, offline-first maternal health support for pregnant and postnatal women and the frontline health workers who help them in low-connectivity settings. Emergency detection is deterministic and runs on the device; the optional assistant answers only from a curated corpus. See [SAFETY.md](SAFETY.md) for the clinical safety protocol and [DPG_CHECKLIST.md](DPG_CHECKLIST.md) for the (self-assessed) Digital Public Goods mapping.
+
+**Live demo:** https://najibadam-commits.github.io/mamacare-ai/ (static build on GitHub Pages; the AI assistant is not hosted there, so it shows its offline-library fallback).
 
 **Roadmap:** the 12-month plan is in [ROADMAP.md](ROADMAP.md).
 

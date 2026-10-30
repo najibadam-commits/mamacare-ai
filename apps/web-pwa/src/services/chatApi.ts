@@ -3,7 +3,7 @@ import { evaluateSymptoms } from './triage'
 import type { TriageResult } from './triage'
 
 /** Relative URL: the Vite dev/preview proxy (or a reverse proxy in production) forwards /api to the RAG engine. */
-export const CHAT_ENDPOINT = '/api/chat'
+export const CHAT_ENDPOINT = `${import.meta.env.BASE_URL}api/chat`
 export const CHAT_TIMEOUT_MS = 5000
 
 export interface ChatSource {
