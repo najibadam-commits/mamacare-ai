@@ -1,4 +1,4 @@
-<p align="center"><img src="docs/assets/logo.png" alt="MamaCare AI - Bridging Maternal & Newborn Care" width="420"></p>
+<p align="center"><img src="docs/assets/logo.png" alt="MamaCare AI - Bridging Maternal & Newborn Care" width="360"></p>
 
 # MamaCare AI
 

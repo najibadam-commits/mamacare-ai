@@ -33,7 +33,7 @@ export default function Header({ onEmergency, onOpenSettings }: HeaderProps) {
       <div className="mx-auto flex h-14 max-w-xl items-center justify-between gap-2 px-3">
         <h1 className="flex min-w-0 items-center gap-1.5 whitespace-nowrap text-[15px] max-[340px]:text-sm font-bold tracking-tight min-[400px]:text-base">
           <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white shadow-sm">
-            <img src="/logo-mark.png" alt="" width={28} height={29} className="h-6 w-auto" />
+            <img src="/logo-mark.png" alt="" width={26} height={24} className="h-6 w-auto" />
           </span>
           MamaCare AI
         </h1>
