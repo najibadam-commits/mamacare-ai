@@ -17,7 +17,7 @@ function Ok($m)   { Write-Host "   OK: $m" -ForegroundColor Green }
 function Warn($m) { Write-Host "   NOTE: $m" -ForegroundColor Yellow }
 
 # gh writes harmless notices to stderr; don't let them abort the script.
-function Gh { $old = $ErrorActionPreference; $ErrorActionPreference = 'Continue'; & gh @args 2>&1; $script:ghExit = $LASTEXITCODE; $ErrorActionPreference = $old }
+function GhRun { $old = $ErrorActionPreference; $ErrorActionPreference = 'Continue'; & gh @args 2>&1; $script:ghExit = $LASTEXITCODE; $ErrorActionPreference = $old }
 
 Step 'Checking tools'
 if (-not (Get-Command git -ErrorAction SilentlyContinue)) { throw 'Git is not installed. Install from https://git-scm.com' }
@@ -25,7 +25,7 @@ if (-not (Get-Command gh  -ErrorAction SilentlyContinue)) { throw 'GitHub CLI no
 Ok 'git and gh found'
 
 Step 'Checking GitHub login'
-Gh auth status | Out-Null
+GhRun auth status | Out-Null
 if ($script:ghExit -ne 0) {
   Warn 'Not logged in. A browser sign-in will open.'
   & gh auth login --hostname github.com --git-protocol https --web
@@ -34,15 +34,15 @@ if ($script:ghExit -ne 0) {
 Ok 'logged in'
 
 Step 'Enabling GitHub Pages (source: GitHub Actions)'
-$out = Gh api -X POST "repos/$Repo/pages" -f build_type=workflow
+$out = GhRun api -X POST "repos/$Repo/pages" -f build_type=workflow
 if ($script:ghExit -ne 0) {
-  $out = Gh api -X PUT "repos/$Repo/pages" -f build_type=workflow
+  $out = GhRun api -X PUT "repos/$Repo/pages" -f build_type=workflow
   if ($script:ghExit -ne 0) { Warn "Could not set it automatically. Do it by hand: Settings > Pages > Source > GitHub Actions.`n$out" }
   else { Ok 'Pages already existed; source set to GitHub Actions' }
 } else { Ok 'Pages enabled' }
 
 Step 'Running the demo deployment'
-Gh workflow run pages.yml --repo $Repo | Out-Null
+GhRun workflow run pages.yml --repo $Repo | Out-Null
 if ($script:ghExit -eq 0) { Ok 'started. Watch it under the Actions tab (about 2 minutes). Demo: https://najibadam-commits.github.io/mamacare-ai/' }
 else { Warn 'Could not start it. Open Actions > "Deploy live demo (GitHub Pages)" > Run workflow.' }
 
@@ -56,9 +56,9 @@ else {
   & git push origin $Tag
   if ($LASTEXITCODE -eq 0) { Ok "$Tag pushed" } else { Warn 'Tag push failed. Use GitHub > Releases > Draft a new release with tag v0.1.0.' }
 }
-Gh release view $Tag --repo $Repo | Out-Null
+GhRun release view $Tag --repo $Repo | Out-Null
 if ($script:ghExit -ne 0) {
-  Gh release create $Tag --repo $Repo --title "MamaCare AI $Tag (pilot candidate)" --notes-file CHANGELOG.md --verify-tag | Out-Null
+  GhRun release create $Tag --repo $Repo --title "MamaCare AI $Tag (pilot candidate)" --notes-file CHANGELOG.md --verify-tag | Out-Null
   if ($script:ghExit -eq 0) { Ok 'GitHub release published' } else { Warn 'Release not created; create it in the GitHub web UI.' }
 } else { Ok 'release already exists' }
 
@@ -71,7 +71,7 @@ $labels = @(
   @('enhancement',     'A2EEEF', 'New feature or request'),
   @('documentation',   '0075CA', 'Documentation')
 )
-foreach ($l in $labels) { Gh label create $l[0] --repo $Repo --color $l[1] --description $l[2] --force | Out-Null }
+foreach ($l in $labels) { GhRun label create $l[0] --repo $Repo --color $l[1] --description $l[2] --force | Out-Null }
 Ok 'labels ready'
 
 Step 'Creating roadmap issues'
@@ -92,7 +92,7 @@ $issues = @(
 $existing = (& gh issue list --repo $Repo --state all --limit 100 --json title --jq '.[].title') -join "`n"
 foreach ($i in $issues) {
   if ($existing -like "*$($i.t)*") { Ok "exists: $($i.t)"; continue }
-  $url = Gh issue create --repo $Repo --title $i.t --body $i.b --label $i.l
+  $url = GhRun issue create --repo $Repo --title $i.t --body $i.b --label $i.l
   if ($script:ghExit -eq 0) { Ok "$url" } else { Warn "Failed: $($i.t)`n$url" }
 }
 
