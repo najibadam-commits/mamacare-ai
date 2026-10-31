@@ -242,3 +242,16 @@ test.describe('Journey 5 - Offline resilience', () => {
     await expect(page.locator('article').first()).toBeVisible()
   })
 })
+
+test.describe('Home screen', () => {
+  test('shows quick actions, opens emergency help, and navigates', async ({ page }) => {
+    await openApp(page)
+    await expect(page.getByRole('heading', { name: 'Know the danger signs' })).toBeVisible()
+    await expect(page.getByText('No visit planned yet')).toBeVisible()
+    await page.getByRole('button', { name: 'Open emergency help' }).click()
+    await expect(page.getByTestId('emergency-modal')).toBeVisible()
+    await page.keyboard.press('Escape')
+    await page.getByRole('button', { name: 'Read guides' }).click()
+    await expect(page.getByRole('navigation', { name: 'Primary' }).getByRole('button', { name: /Guides/ })).toHaveAttribute('aria-current', 'page')
+  })
+})

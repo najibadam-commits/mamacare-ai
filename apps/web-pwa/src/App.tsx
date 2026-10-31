@@ -44,7 +44,7 @@ export default function App() {
       )}
 
       <main className="mx-auto w-full max-w-xl flex-1 px-4 pb-28 pt-4">
-        {tab === 'home' && <HomeScreen />}
+        {tab === 'home' && <HomeScreen onNavigate={setTab} onEmergency={() => setEmergency({ result: null })} />}
         {tab === 'guides' && <GuidesScreen />}
         {tab === 'appointments' && <AppointmentsScreen />}
         {tab === 'assistant' && (
