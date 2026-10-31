@@ -123,6 +123,10 @@ export default function AssistantScreen({ onDangerSign, onFindFacility }: Assist
         <p>{t('assistant.disclaimer')}</p>
       </div>
 
+      <p className="text-[11px] leading-snug text-slate-600" data-testid="assistant-privacy-notice">
+        {t('assistant.privacyNotice')}
+      </p>
+
       <div className="flex items-end justify-between gap-3">
         <div className="min-w-0 flex-1">
           <label htmlFor="assistant-stage" className="block text-xs font-semibold text-slate-600">

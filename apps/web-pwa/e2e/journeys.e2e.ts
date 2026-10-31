@@ -129,6 +129,7 @@ test.describe('Journey 3 - Clinical safety triage blocks transmission', () => {
     )
     await openApp(page)
     await goTab(page, /AI Assistant/)
+    await expect(page.getByTestId('assistant-privacy-notice')).toContainText('sent to the MamaCare server')
     await page.getByRole('button', { name: 'How do I prevent malaria?' }).click()
     await expect(page.getByText('Sleep under a treated net every night.')).toBeVisible()
     await expect(page.getByRole('button', { name: /Sources \(1\)/ })).toBeVisible()
