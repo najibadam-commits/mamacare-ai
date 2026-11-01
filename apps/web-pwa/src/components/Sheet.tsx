@@ -39,7 +39,7 @@ export default function Sheet({ title, onClose, children, footer, zClass = 'z-40
             <X className="h-5 w-5" aria-hidden />
           </button>
         </header>
-        <div className="flex-1 overflow-y-auto px-5 py-4">{children}</div>
+        <div className="flex-1 overflow-y-auto px-5 py-4" tabIndex={0}>{children}</div>
         {footer && <footer className="border-t border-slate-200 bg-white px-5 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]">{footer}</footer>}
       </div>
     </div>

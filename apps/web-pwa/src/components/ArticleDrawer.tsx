@@ -55,7 +55,7 @@ export default function ArticleDrawer({ guide, onClose }: ArticleDrawerProps) {
           </button>
         </header>
 
-        <div className="space-y-4 overflow-y-auto px-5 pb-8 pt-4">
+        <div className="space-y-4 overflow-y-auto px-5 pb-8 pt-4" tabIndex={0}>
           {guide.warning && (
             <div role="alert" className="flex gap-3 rounded-2xl border-2 border-red-300 bg-red-50 p-4 text-red-900">
               <TriangleAlert className="mt-0.5 h-6 w-6 shrink-0 text-red-600" aria-hidden />

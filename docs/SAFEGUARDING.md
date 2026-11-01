@@ -32,7 +32,7 @@
 
 ## 4. Reporting
 
-Concerns about safety, harm, misuse or content: **najibadam@gmail.com** (see also [SECURITY.md](SECURITY.md)). Reports are acknowledged within 48 hours.
+Concerns about safety, harm, misuse or content: **najibadam@gmail.com** (see also [SECURITY.md](../SECURITY.md)). Reports are acknowledged within 48 hours.
 
 ## 5. Review
 

@@ -43,6 +43,7 @@ export default function GuidesScreen() {
               aria-valuemin={0}
               aria-valuemax={total}
               aria-valuenow={readCount}
+              aria-label={t('guides.progress', { read: readCount, total })}
             >
               <div className="h-full rounded-full bg-teal transition-all" style={{ width: `${(readCount / total) * 100}%` }} />
             </div>
@@ -80,7 +81,8 @@ export default function GuidesScreen() {
           {t('guides.empty')}
         </p>
       ) : (
-        <ul className="space-y-3" role="tabpanel">
+        <div role="tabpanel">
+        <ul className="space-y-3">
           {stageGuides.map((g) => (
             <li key={g.id}>
               <button
@@ -112,6 +114,7 @@ export default function GuidesScreen() {
             </li>
           ))}
         </ul>
+        </div>
       )}
 
       {openGuide && <ArticleDrawer guide={openGuide} onClose={closeArticle} />}

@@ -9,7 +9,7 @@
 
 A mobile-first maternal health platform for Nigeria. MamaCare AI gives expectant and new mothers trusted health guides, appointment tracking, an AI assistant, and a directory of nearby healthcare facilities, in **English, Hausa and Nigerian Pidgin**.
 
-> Status: **pilot candidate (Sprint 8)** - offline-first PWA, multilingual UI, guides, appointments with private reminders, deterministic triage, facility directory, RAG assistant, NDPA privacy controls, DHIS2 connector, Docker deployment and end-to-end tests. Clinical content and translations are **unreviewed prototypes**: see [docs/PILOT.md](docs/PILOT.md) before any real-world use. DPG self-assessment: [DPG_CHECKLIST.md](DPG_CHECKLIST.md). Privacy and safeguarding drafts: [docs/DPIA.md](docs/DPIA.md), [docs/SAFEGUARDING.md](docs/SAFEGUARDING.md).
+> Status: **pilot candidate (v0.1.0)** - offline-first PWA, multilingual UI, guides, appointments with private reminders, deterministic triage, facility directory, RAG assistant, NDPA privacy controls, DHIS2 connector, Docker deployment and end-to-end tests. Clinical content and translations are **unreviewed prototypes**: see [docs/PILOT.md](docs/PILOT.md) before any real-world use. DPG self-assessment: [DPG_CHECKLIST.md](DPG_CHECKLIST.md). Privacy and safeguarding drafts: [docs/DPIA.md](docs/DPIA.md), [docs/SAFEGUARDING.md](docs/SAFEGUARDING.md).
 
 ## Executive summary
 
@@ -25,7 +25,7 @@ MamaCare AI is open-source, offline-first maternal health support for pregnant a
 
 **Data extraction (DPG indicator 6):** users can export their own data as JSON (Settings), and `packages/dhis2-connector` produces zero-PII aggregate DHIS2 `DataValueSet` payloads. There is no CSV export CLI.
 
-## Features (current shell)
+## Features
 
 - Mobile-first, installable PWA (React 18 + Vite + TypeScript + Tailwind CSS)
 - **Offline-first:** Workbox service worker (via `vite-plugin-pwa`) precaches the app shell, icons and static assets (~360 KiB); guides live in IndexedDB (Dexie)
@@ -63,29 +63,29 @@ The 6 seeded guides (x 3 languages) in `apps/web-pwa/src/data/guides.seed.ts` ar
 flowchart TD
     User([Mother / Caregiver]) --> PWA
 
-    subgraph Monorepo["pnpm workspace"]
-        subgraph PWA["apps/web-pwa"]
-            Shell["App shell<br/>Header + Bottom Nav"]
-            Shell --> Home[Home]
-            Shell --> Guides[Guides viewer]
-            Shell --> Appts[Appointments]
-            Shell --> AI[AI Assistant]
-            Shell --> Dir[Healthcare Directory]
-        end
-        Pkgs["packages/* (future shared libs)"]
+    subgraph PWA["apps/web-pwa (runs on the phone, works offline)"]
+        Shell["App shell<br/>Header + Bottom Nav"]
+        Shell --> Home[Home]
+        Shell --> Guides[Guides viewer]
+        Shell --> Appts[Appointments]
+        Shell --> AI[AI Assistant]
+        Shell --> Dir[Healthcare Directory]
+        Triage["Deterministic triage<br/>(runs first, on device)"]
+        AI --> Triage
         SW["Service worker (Workbox)<br/>precached app shell"]
         I18N["i18n provider<br/>EN / HA / PCM"]
-        IDB[("IndexedDB via Dexie<br/>guides, userPreferences")]
+        IDB[("IndexedDB via Dexie<br/>guides, appointments, preferences<br/>notes encrypted (AES-GCM)")]
         Guides --> IDB
+        Appts --> IDB
         Shell --> I18N
-        I18N --> IDB
         PWA --- SW
     end
 
-    PWA -. planned .-> API["Backend API (planned)"]
-    API -. planned .-> RAG["services/rag-engine<br/>FastAPI + ChromaDB"]
-    RAG -.-> LLM["Optional LLM"]
-    API -. planned .-> DB[("Facility & user data")]
+    Triage -- "no danger sign + online" --> Proxy["nginx: /api proxy<br/>CSP + security headers"]
+    Proxy --> RAG["services/rag-engine<br/>FastAPI + ChromaDB<br/>input guard, retrieval, output guard"]
+    RAG -.-> LLM["Optional external LLM<br/>(off by default)"]
+    AI -. "offline or error" .-> FAQ["Offline FAQ from saved guides"]
+    DHIS2["packages/dhis2-connector<br/>zero-PII aggregate DataValueSet"] -.-> D2[("DHIS2 (optional)")]
 ```
 
 ## Repository layout
@@ -151,7 +151,7 @@ pnpm --filter web-pwa build && pnpm --filter web-pwa preview
 
 Open the preview URL and load it once while online. In Chrome DevTools, check **Application > Service Workers** (activated), then set **Network > Offline** and reload: the app, the guides and language switching keep working.
 
-## RAG engine (Sprint 5)
+## RAG engine
 
 `services/rag-engine` is a FastAPI microservice that ingests the curated guideline corpus into ChromaDB, retrieves the top-3 chunks for a question and returns a grounded, non-prescriptive answer with citations. It refuses dosage/diagnosis requests, falls back to a fixed safe message when the corpus has no answer, and always advises seeing a midwife or doctor for danger signs.
 
@@ -165,7 +165,7 @@ uvicorn app.main:app --port 8000
 
 The corpus is prototype content that needs clinical review - see [services/rag-engine/README.md](services/rag-engine/README.md) for limitations.
 
-## AI Assistant tab (Sprint 6)
+## AI Assistant tab
 
 The Assistant tab (`apps/web-pwa/src/features/assistant/`) talks to the RAG engine through `services/chatApi.ts` (`POST /api/chat`, 5 s timeout, never throws).
 
@@ -187,7 +187,7 @@ Every answer and fallback card has a **Listen** button (browser `speechSynthesis
 
 Known limits: the backend currently answers in English even when Hausa/Pidgin is selected (its corpus is English), so the voice reads English text with the selected language's voice setting; offline matching is keyword-based over the 6 seeded guides; in production `/api` must be routed to the RAG engine by your reverse proxy (the Vite proxy only covers `dev` and `preview`).
 
-## Privacy and security (Sprint 7)
+## Privacy and security
 
 - **Settings and privacy** (gear icon in the header): plain-language NDPA privacy card, **Export My Data** (JSON of appointments and settings), **Delete All My Data** (deletes the IndexedDB database, destroys the encryption key, clears local/session storage, closes notifications, reloads clean) and a **storage audit** in KB.
 - **Encrypted fields:** appointment notes and the emergency contact number are encrypted with AES-GCM 256 (Web Crypto) before they reach IndexedDB. The key is random, non-extractable and stored on the device; it is destroyed on delete. This protects data at rest from casual inspection; it does not protect against someone using the unlocked app. Needs a secure context (https or localhost), otherwise notes cannot be saved (it fails closed, never to plaintext). Appointment titles and facility names are not encrypted.
@@ -199,7 +199,7 @@ pnpm install
 pnpm build && pnpm lint && pnpm test     # runs across web-pwa and the connector
 ```
 
-## End-to-end tests (Sprint 8)
+## End-to-end tests
 
 Playwright runs five user journeys on an emulated Pixel 5 (language switch, appointment + discreet reminder, emergency interception with no network call, delete-all-data, offline use). It builds and serves the app itself.
 
