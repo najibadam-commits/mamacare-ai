@@ -21,7 +21,7 @@ Maps MamaCare AI against the nine indicators of the [Digital Public Goods Standa
 ## Clinical safety (not a DPG indicator, but a release blocker)
 
 - Deterministic triage runs before any network call and is unit-tested in three languages.
-- All clinical text, phrase lists and translations are **unreviewed prototypes**; clinician and native-speaker sign-off is mandatory before real use.
+- All clinical text, phrase lists and translations are **unreviewed prototypes** until signed off; the process, scope and log are in [docs/CLINICAL_REVIEW.md](docs/CLINICAL_REVIEW.md). Clinician and native-speaker sign-off is mandatory before real use.
 
 ## Outstanding actions before applying
 

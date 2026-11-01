@@ -8,6 +8,7 @@ This document states what MamaCare AI does to keep users safe, and where it fall
 - **Human in the loop.** Every emergency path ends in a person: tap-to-call 112, a saved personal contact, and a facility finder. The assistant tells users to see a provider for any danger sign.
 - **Population:** pregnancy and the postnatal period. Content outside this scope is answered with a fixed "no verified guidance" message.
 - **Unreviewed content.** The guides, clinical corpus, triage phrase lists and Hausa/Pidgin translations are prototypes. They must be reviewed and signed off by clinicians and native-speaker health workers before real-world use (see [docs/PILOT.md](docs/PILOT.md)).
+- **Review status.** Clinical and language review is in progress; what has and has not been signed off is recorded in [docs/CLINICAL_REVIEW.md](docs/CLINICAL_REVIEW.md), with a printable [triage review sheet](docs/clinical-review/TRIAGE_REVIEW_SHEET.md).
 
 ## 2. Deterministic red-flag triage (no generative AI)
 
