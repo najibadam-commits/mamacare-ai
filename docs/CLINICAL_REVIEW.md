@@ -22,6 +22,7 @@
 4. After changes, re-run `pnpm test` and regenerate the sheets: `node scripts/export-review-pack.mjs review.json` (readable markdown copy plus data), then `python3 scripts/build-review-pack.py review.json MamaCare_AI_triage_review_sheet.docx v0.1.0` (printable Word pack, needs `pip install python-docx`).
 5. Add a row to the log below. Reviewers' names are recorded only with their consent; otherwise record role and facility.
 6. Keep signed paper or scanned copies outside the public repository. Never include patient information.
+7. Facilities that take part may also be listed in the app's directory, but only with the facility's written permission and only with details someone at the facility has confirmed. Use the one-page form built by `python3 scripts/build-facility-form.py`. Being listed or named is not an endorsement or partnership, and the wording in any public document must say so.
 
 ## Review log
 
