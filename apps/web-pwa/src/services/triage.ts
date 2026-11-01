@@ -414,3 +414,17 @@ export function listTriagePhrases(): { id: DangerSignId; language: Language; urg
     [...hard, ...soft].map((p) => ({ id: rule.id, language: p.language, urgency: p.urgency, phrase: p.source })),
   )
 }
+
+/** The compact phrase patterns (before expansion) per danger sign, for printable clinical review sheets. */
+export function listTriagePatterns(): { id: DangerSignId; language: Language; urgency: TriageUrgency; pattern: string }[] {
+  const out: { id: DangerSignId; language: Language; urgency: TriageUrgency; pattern: string }[] = []
+  for (const rule of RULES) {
+    for (const [set, urgency] of [[rule.terms, rule.urgency], [rule.softTerms, 'urgent']] as const) {
+      if (!set) continue
+      for (const language of Object.keys(set) as Language[]) {
+        for (const pattern of set[language]) out.push({ id: rule.id, language, urgency: urgency as TriageUrgency, pattern })
+      }
+    }
+  }
+  return out
+}

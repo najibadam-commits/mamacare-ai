@@ -47,4 +47,18 @@ for (const id of triage.DANGER_SIGN_IDS) {
 }
 mkdirSync(join(root, 'docs/clinical-review'), { recursive: true })
 writeFileSync(join(root, 'docs/clinical-review/TRIAGE_REVIEW_SHEET.md'), lines.join('\n'))
+// Machine-readable copy for the printable (Word/PDF) pack builder.
+const data = triage.DANGER_SIGN_IDS.map((id) => ({
+  id,
+  languages: langs.map(([lc, ln]) => {
+    const pats = triage.listTriagePatterns().filter((p) => p.id === id && p.language === lc)
+    const sample = all.find((p) => p.id === id && p.language === lc)?.phrase ?? ''
+    const r = triage.evaluateSymptoms(sample, lc)
+    return { code: lc, name: ln, label: r.matches[0]?.label ?? '', advice: r.recommendedAction,
+      urgent: pats.filter((p) => p.urgency === 'urgent').map((p) => p.pattern),
+      emergency: pats.filter((p) => p.urgency === 'emergency').map((p) => p.pattern),
+      expanded: all.filter((p) => p.id === id && p.language === lc).length }
+  }),
+}))
+if (process.argv[2]) writeFileSync(process.argv[2], JSON.stringify(data, null, 1))
 console.log('Wrote docs/clinical-review/TRIAGE_REVIEW_SHEET.md (' + all.length + ' phrases, ' + triage.DANGER_SIGN_IDS.length + ' danger signs)')

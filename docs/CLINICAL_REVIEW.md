@@ -19,7 +19,7 @@
 1. Record the exact version reviewed (the git commit or release tag, for example `v0.1.0`).
 2. Reviewers mark each item OK, CHANGE (with the correction) or REMOVE. For item 1, use the printable triage sheet and keep the signed copy.
 3. Every accepted change goes in through a pull request from a `clinical-validation/` branch that cites the source guideline and version (see [CONTRIBUTING.md](../CONTRIBUTING.md)).
-4. After changes, re-run `pnpm test` and regenerate the sheet with `node scripts/export-review-pack.mjs`.
+4. After changes, re-run `pnpm test` and regenerate the sheets: `node scripts/export-review-pack.mjs review.json` (readable markdown copy plus data), then `python3 scripts/build-review-pack.py review.json MamaCare_AI_triage_review_sheet.docx v0.1.0` (printable Word pack, needs `pip install python-docx`).
 5. Add a row to the log below. Reviewers' names are recorded only with their consent; otherwise record role and facility.
 6. Keep signed paper or scanned copies outside the public repository. Never include patient information.
 
