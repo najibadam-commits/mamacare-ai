@@ -9,7 +9,7 @@
 
 A mobile-first maternal health platform for Nigeria. MamaCare AI gives expectant and new mothers trusted health guides, appointment tracking, an AI assistant, and a directory of nearby healthcare facilities, in **English, Hausa and Nigerian Pidgin**.
 
-> Status: **pilot candidate (v0.1.0)** - offline-first PWA, multilingual UI, guides, appointments with private reminders, deterministic triage, facility directory, RAG assistant, NDPA privacy controls, DHIS2 connector, Docker deployment and end-to-end tests. Clinical content and translations are **unreviewed prototypes**: see [docs/PILOT.md](docs/PILOT.md) before any real-world use. DPG self-assessment: [DPG_CHECKLIST.md](DPG_CHECKLIST.md). Privacy and safeguarding drafts: [docs/DPIA.md](docs/DPIA.md), [docs/SAFEGUARDING.md](docs/SAFEGUARDING.md).
+> Status: **pilot candidate (v0.1.0)** - offline-first PWA, multilingual UI, guides, appointments with private reminders, deterministic triage, facility directory, RAG assistant, NDPA privacy controls, DHIS2 connector, Docker deployment and end-to-end tests. The danger-sign alert wording has had a **first round of review** by six frontline health workers at five facilities in three states (4-8 Nov 2026; one correction applied, some suggestions open; see [docs/CLINICAL_REVIEW.md](docs/CLINICAL_REVIEW.md)). All other clinical content and translations are **unreviewed prototypes**, and this is not a clinical validation: see [docs/PILOT.md](docs/PILOT.md) before any real-world use. DPG self-assessment: [DPG_CHECKLIST.md](DPG_CHECKLIST.md). Privacy and safeguarding drafts: [docs/DPIA.md](docs/DPIA.md), [docs/SAFEGUARDING.md](docs/SAFEGUARDING.md).
 
 ## Executive summary
 

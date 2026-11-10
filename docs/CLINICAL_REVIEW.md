@@ -1,6 +1,6 @@
 # Clinical and language review record
 
-**Status: in progress.** Face-to-face review discussions with health workers at primary health centres are under way. **No completed sign-off is recorded in this repository yet.** Until the log below has signed entries covering an item, treat that item as an unreviewed prototype (see [SAFETY.md](../SAFETY.md)).
+**Status: first round of item 1 collected; review still in progress.** Between 4 and 8 November 2026, six frontline health workers at five facilities in three states (Kano, Katsina and Adamawa) reviewed the danger-sign alert wording (item 1, version v0.1.0) on printed sheets. Most marked every alert OK. One wording correction was accepted and applied; several suggestions and some unexplained cross-outs are still open (see the log). This is **not** a completed sign-off or a clinical validation: under the sign-off rule below, item 1 stays "review in progress" until the open points are resolved, and items 2 to 7 (guides, assistant corpus, offline FAQ, Hausa/Pidgin interface text, facility data, immunisation statements) have **not** yet been reviewed. Treat anything not covered by a signed entry as an unreviewed prototype (see [SAFETY.md](../SAFETY.md)).
 
 ## What must be reviewed
 
@@ -28,7 +28,19 @@
 
 | Date | Item(s) | Version reviewed | Reviewer (name or role) | Qualification | Facility / location | Outcome | Changes made (PR or commit) | Signed copy held |
 |---|---|---|---|---|---|---|---|---|
-| _EXAMPLE, delete when real rows are added:_ 2026-11-02 | 1 | v0.1.0 | Midwife (name withheld) | Registered midwife | Example PHC, Kano | CHANGE: 3 phrases | PR #00 | Yes |
+| 2026-11-04 | 1 (EN) | v0.1.0 | Saifullahi Ibrahim (consented) | CHEW, second in charge | Kadawa Gate PHC, Garun Mallam LGA, Kano | Reviewed in **English** (only language declared). OK on all 7 alerts. Suggested additions, not applied: "dizziness" (bleeding); "crying", "yellow eye", "cyanosis / blue skin" (newborn signs, not covered by the current 7); "weakness", "joint pain" (fever). A few English trigger phrases are marked with an X (for example "soak...", "blood from...", "blood (in / on)...", "severe malaria") with no explanation. One Pidgin "Change" box ticked without text (waters breaking). | None yet; suggestions need a second reviewer | Yes |
+| 2026-11-05 | 1 (HA) | v0.1.0 | Reviewer name not published | Officer in charge, BSc Community Health | Bara PHC, Rogo LGA, Kano | Reviewed in **Hausa** only. OK on the Hausa advice for all 7 alerts; "No corrections" written. Several Hausa trigger phrases are struck through (bleeding: 5 phrases; severe headache: the swelling and high-blood-pressure "weaker" phrases; fever: one phrase), which conflicts with "No corrections". | None; no phrase removed. Follow up with the reviewer. Missing a danger sign is worse than a false alarm | Yes |
+| 2026-11-05 | 1 (EN) | v0.1.0 | Reviewer name not published | CHEW, in charge | CHC Mashi, Katsina State | Marked OK on all alerts, "all correct, no corrections". Declared English (Pidgin mark unclear), not Hausa. Only the English review is counted. | None needed | Yes |
+| 2026-11-05 | 1 (EN, HA) | v0.1.0 | Reviewer name not published | CHEW, in charge | A health centre in Adamawa State (facility name withheld: no permission recorded) | Reviewed in **English and Hausa**. OK on all alerts, "all the words are correct". | None needed | Yes |
+| 2026-11-07 | 1 (EN, PCM) | v0.1.0 | Reviewer name withheld at reviewer's request | Midwife | CHC Matazu, Katsina State | OK on all alerts except one **CHANGE**: in English use "abdominal pain" instead of "belly pain" (postpartum alert). | Applied: English title and advice of the postpartum alert now say "abdominal pain" (branch clinical-validation/first-round-review). "belly" remains an accepted trigger word. | Yes |
+| 2026-11-08 | 1 (EN, HA, PCM) | v0.1.0 | Nafisa Garba (consented) | Community Health Officer, in charge | CHC Matazu, Katsina State | OK on the alerts reviewed; no corrections written. Some pages were scanned sideways and a few tick marks are hard to read. | None needed | Yes |
+
+### Open points from the first round
+
+1. **Suggested additions** (Kadawa Gate PHC): "dizziness" with bleeding; newborn danger signs (crying, yellow eye, blue skin); "weakness" and "joint pain" with fever. These are not applied because "dizziness", "weakness" and "joint pain" alone are common and non-specific, and the newborn signs are outside the current seven alerts. Each needs a second clinician's view before any change.
+2. **Struck-through phrases** (Kadawa Gate PHC English; Bara PHC Hausa): the meaning is unclear, since the reviewers also wrote "no corrections". No phrase has been removed. The app deliberately over-alerts rather than under-alerts, so a phrase is removed only after the reviewer confirms it is wrong.
+3. **Language scope:** only the languages a reviewer declared are counted (Kadawa Gate: English; Bara: Hausa; Mashi: English; Adamawa centre: English and Hausa; Matazu: midwife English and Pidgin, CHO English, Hausa and Pidgin). Pidgin therefore has limited review so far.
+4. **Not yet reviewed:** items 2 to 7.
 
 ## Sign-off rule
 
